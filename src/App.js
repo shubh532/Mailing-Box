@@ -8,7 +8,7 @@ import Container from "react-bootstrap/esm/Container";
 
 function App() {
 
-  const Authenction=useSelector(state=>state.AuthReducer)
+  const isLogin=useSelector(state=>state.AuthReducer.isLogin)
 
 
   return (
@@ -19,7 +19,7 @@ function App() {
           <SignUp/>
         </Route>
         <Route path="/home">
-          <HomePage />
+        {isLogin?<HomePage/>:<Redirect to="/"/>}
         </Route>
       </Switch>
     </Container>

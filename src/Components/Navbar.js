@@ -1,18 +1,35 @@
 import Container from 'react-bootstrap/Container';
-import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { AuthActions } from "../Redux Store/Authentication.js"
 
 function NavBar() {
+
+    const redirectPage = useHistory()
+    const IsLogin = useSelector(state => state.AuthReducer.isLogin)
+    const Dispatch = useDispatch()
+
+    function LogoutHandler() {
+        Dispatch(AuthActions.LogOut())
+        redirectPage.replace("/")
+        localStorage.removeItem("TokenID")
+        localStorage.removeItem("Email")
+    }
     return (
         <Navbar bg="dark" expand="lg" variant='dark'>
             <Container>
-                <Navbar.Brand as={NavLink} to="/home">Mailing Box</Navbar.Brand>
+                <Navbar.Brand as={Link} to="/home">Mailing Box</Navbar.Brand>
 
                 <Nav className="me-auto">
-                    <Nav.Link as={NavLink} to="/home">Home</Nav.Link>
-                    <Nav.Link as={NavLink} to="/products">Products</Nav.Link>
-                    <Nav.Link as={NavLink} to="/aboutus">About Us</Nav.Link>
+                    <Nav.Link as={Link} to="/home">Home</Nav.Link>
+                    <Nav.Link as={Link} to="/products">Products</Nav.Link>
+                    <Nav.Link as={Link} to="/aboutus">About Us</Nav.Link>
+                </Nav>
+                <Nav className="m-0">
+                    {IsLogin && <Nav.Link as={Link} to="/" onClick={LogoutHandler}>LogOut</Nav.Link>}
+                    {!IsLogin && <Nav.Link as={Link} to="/">Login</Nav.Link>}
                 </Nav>
 
             </Container>
