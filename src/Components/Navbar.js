@@ -24,7 +24,7 @@ function NavBar() {
 
                 <Nav className="me-auto">
                     <Nav.Link as={Link} to="/home">Home</Nav.Link>
-                    <Nav.Link as={Link} to="/products">Products</Nav.Link>
+                    <Nav.Link as={Link} to="/product">Products</Nav.Link>
                     <Nav.Link as={Link} to="/aboutus">About Us</Nav.Link>
                 </Nav>
                 <Nav className="m-0">

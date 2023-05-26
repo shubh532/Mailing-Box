@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import AuthReducer from "./Authentication"
+import SendReducer from "./SendMail";
 
 const Store=configureStore({
     reducer:{
-        AuthReducer:AuthReducer
+        AuthReducer:AuthReducer,
+        SendReducer:SendReducer
     }
 })
 
