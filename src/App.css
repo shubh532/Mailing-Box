@@ -1,5 +1,19 @@
 .Container{
-  height: 100vh;
   padding: 0px !important;
-  background-color:rgb(200, 200, 200);
+  /* background-color:rgb(255, 255, 255); */
+}
+
+/* .custom-row{
+  width: 100%;
+  height: 9vh;
+} */
+.sidebarrow{
+  height: 93.2vh;
+}
+.mailpagerow{
+  position: fixed;
+  right: 0rem;
+  top:3.5rem;
+  /* border: 2px solid; */
+  height: 92vh;
 }

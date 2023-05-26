@@ -1,0 +1,12 @@
+.Container{
+    width: 100%;
+    position: sticky;
+    top: 55px;
+    height: 99.3%;
+    padding: 10px;
+    color: white;
+    background-color: rgb(33,37,41);
+    /* background-color: rgb(32, 127, 222); */
+    word-wrap: break-word;
+
+}

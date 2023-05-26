@@ -5,6 +5,7 @@ import MailingBox from "../MailComponents/MailingBox";
 import Style from "./MailPage.module.css"
 import Button from "react-bootstrap/Button"
 import axios from "axios";
+import Row from "react-bootstrap/esm/Row";
 
 function MailPage() {
     const Message = useSelector(state => state.SendReducer.Message)
@@ -39,13 +40,19 @@ function MailPage() {
 
     return (
         <Container className={`${Style.MainContainer} bg-light`}>
-            <div className={Style.InputContainer}>
-                <input type="email" ref={GetRecievermailID} placeholder="To" />
-                <input type="text" ref={GetSubject} placeholder="Subject" />
-            </div>
-            <MailingBox />
+            <Row>
+                <div className={Style.InputContainer}>
+                    <input type="email" ref={GetRecievermailID} placeholder="To" />
+                    <input type="text" ref={GetSubject} placeholder="Subject" />
+                </div>
+            </Row>
 
-            <Button onClick={SendMailHandler} variant="primary">Send</Button>
+            <MailingBox />
+            <Row className={`p-3 ${Style.BtnRow}`}>
+                <Button onClick={SendMailHandler} variant="primary">Send</Button>
+            </Row>
+
+
         </Container>
     )
 }

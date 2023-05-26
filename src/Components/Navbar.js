@@ -18,7 +18,7 @@ function NavBar() {
         localStorage.removeItem("Email")
     }
     return (
-        <Navbar bg="dark" expand="lg" variant='dark'>
+        <Navbar bg="dark" expand="lg" variant='dark' className="fixed-top">
             <Container>
                 <Navbar.Brand as={Link} to="/home">Mailing Box</Navbar.Brand>
 
