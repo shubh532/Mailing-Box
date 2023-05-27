@@ -22,7 +22,7 @@ function MailingBox() {
         let html=convertToHTML(editorState.getCurrentContent())
         SetConvertedContent(html)
         Dispatch(SendMailActions.GetMessage(ConvertedContent))
-    },[editorState,ConvertedContent])
+    },[editorState,ConvertedContent,Dispatch])
 
     // function createMarkup(html) {
     //     return {

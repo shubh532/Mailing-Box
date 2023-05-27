@@ -1,12 +1,43 @@
-.Container{
+.Container {
     width: 100%;
     position: sticky;
     top: 55px;
     height: 99.3%;
     padding: 10px;
     color: white;
-    background-color: rgb(33,37,41);
-    /* background-color: rgb(32, 127, 222); */
+    background-color: rgb(33, 37, 41);
     word-wrap: break-word;
+}
 
+.ComposeBtn {
+    margin-bottom: 1.5rem;
+    padding: 0px 10px;
+}
+
+.ComposeBtn button {
+    padding: 8px 20px;
+    font-weight: 600;
+    border-radius: 8px;
+    background-color: #b6b5b5;
+}
+.ComposeBtn button:hover{
+    background-color:#eae9e9 ;
+}
+
+.SideNavBar span {
+    margin-left: 5px;
+}
+
+.SideNavBar button {
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    width: 100%;
+    border: 0px;
+    background-color: inherit;
+}
+
+.SideNavBar button:hover{
+    background-color:rgb(55, 59, 63);
 }

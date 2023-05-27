@@ -23,9 +23,9 @@ function NavBar() {
                 <Navbar.Brand as={Link} to="/home">Mailing Box</Navbar.Brand>
 
                 <Nav className="me-auto">
-                    <Nav.Link as={Link} to="/home">Home</Nav.Link>
+                    {/* <Nav.Link as={Link} to="/home">Home</Nav.Link> */}
                     <Nav.Link as={Link} to="/product">Products</Nav.Link>
-                    <Nav.Link as={Link} to="/aboutus">About Us</Nav.Link>
+                    {/* <Nav.Link as={Link} to="/aboutus">About Us</Nav.Link> */}
                 </Nav>
                 <Nav className="m-0">
                     {IsLogin && <Nav.Link as={Link} to="/" onClick={LogoutHandler}>LogOut</Nav.Link>}

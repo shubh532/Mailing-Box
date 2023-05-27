@@ -1,0 +1,61 @@
+.MailContainer {
+    border-bottom: 2px solid rgb(185, 185, 185);
+    display: flex;
+    flex-direction: row;
+    height: 2.5rem;
+}
+
+.SenderInfo {
+    display: flex;
+    align-items: center;
+    width: 25%;
+}
+
+.SenderInfo .Name {
+    margin-left: 10px;
+    font-weight: bold;
+}
+.MailContent{
+    display: flex;
+    align-items: center;
+    width: 75%;
+    white-space:nowrap;
+    overflow: hidden;
+    
+}
+.SubjetSpan{
+    padding: 0px 7px;
+    width:auto;
+    font-weight: bold;
+}
+.ContentSpan{
+    width: auto;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    font-size: 13.5px;
+    padding-right: 10px;
+    
+}
+
+.MailContainer:hover{
+    box-shadow: 0px 0px 5px 2px rgb(141, 141, 141);
+    cursor: pointer;
+}
+
+::-webkit-scrollbar{
+    width: 5px;
+}
+::-webkit-scrollbar-thumb {
+    background: #9da0a4;
+    border-radius: 15px;
+  }
+  .TimeBlock{
+    font-size: 1.35px ;
+    font-weight: bold;
+  }
+
+  .HoverBtns button{
+    background-color: inherit;
+    border: none;
+  }
