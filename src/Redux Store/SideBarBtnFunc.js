@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState={ShowInbox:true}
+const initialState={ShowInbox:false}
 
 const SideBarBtnFuncSlice=createSlice({
     name:'SideBarBtnFunc',

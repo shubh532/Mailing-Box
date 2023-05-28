@@ -13,6 +13,19 @@ function MailPage() {
     const GetRecievermailID = useRef()
     const GetSubject = useRef()
 
+    function GetTimeAndDate() {
+        let currentDate = new Date();
+        let currentTime = currentDate.toLocaleTimeString();
+        let currentDay = currentDate.getDate();
+        let currentMonth = currentDate.getMonth() + 1;
+        let currentYear = currentDate.getFullYear();
+        return {
+            Time: currentTime,
+            Date: currentDay + "/" + currentMonth + "/" + currentYear
+        }
+    }
+   
+
 
 
     const SendMailHandler = async () => {
@@ -20,12 +33,14 @@ function MailPage() {
         let email = GetRecievermailID.current.value
         email = email.replace(/[.]/g, "")
         email = email.replace(/[@]/g, "")
+        const TimeDate = GetTimeAndDate()
 
         try {
-            const Response = await axios.post(`https://mailbox-d39a9-default-rtdb.firebaseio.com/sent/${email}.json`, {
+            const Response = await axios.post(`https://mailbox-d39a9-default-rtdb.firebaseio.com/MailBox/${email}.json`, {
                 Reciever: GetRecievermailID.current.value,
                 Subject: GetSubject.current.value,
-                Message: Message
+                Message: Message,
+                TimeDate:TimeDate
             })
             if (Response.status === 200) {
                 alert("Email Send...")
@@ -51,8 +66,6 @@ function MailPage() {
             <Row className={`p-3 ${Style.BtnRow}`}>
                 <Button onClick={SendMailHandler} variant="primary">Send</Button>
             </Row>
-
-
         </Container>
     )
 }

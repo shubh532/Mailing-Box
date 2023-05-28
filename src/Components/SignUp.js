@@ -113,7 +113,7 @@ function SignUp() {
 
 
     return (
-        <Container className={`mt-5 p-5 ${Style.Container}`}>
+        <Container className={`p-5 ${Style.Container}`}>
             <Form noValidate validated={validated} onSubmit={Login ? SignUpHandeler : LoginHandler}>
                 <h2>{Login ? "Sign Up" : "Login"}</h2>
                 <Row className="mb-3">
