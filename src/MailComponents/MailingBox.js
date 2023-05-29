@@ -7,7 +7,7 @@ import { convertToHTML } from 'draft-convert';
 import "./MailingBox.css"
 
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { SendMailActions } from '../Redux Store/SendMail';
+import { SendMailActions } from '../Redux Store/MailHandler';
 
 function MailingBox() {
     const [editorState, setEditorState] = useState(

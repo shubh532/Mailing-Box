@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import AuthReducer from "./Authentication"
-import SendReducer from "./SendMail";
+import SendReducer from "./MailHandler";
 import SideBarBtnFunc from "./SideBarBtnFunc";
 
 const Store=configureStore({

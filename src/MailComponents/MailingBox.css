@@ -1,25 +1,28 @@
 .wrapper-class {
     position: relative;
-    height: 78%;
+    height: 77%;
+    border: 2px solid blue;
     width: 100%;
 
 }
 
 .editor-class {
     position: absolute;
-    line-height: 8px;
+    line-height:10px;
+    line-break:anywhere;
     padding: 0px 10px;
     overflow: auto;
-    height: 94%;
+    height: 91% !important;
     width: 100%;
+    border:  2px solid;
 
 }
-
 .wrapper-class .toolbar-class {
     background: rgb(34, 34, 34);
     margin: 0px;
     position: sticky;
     top: 0px;
+    z-index: 5;
 }
 
 .wrapper-class .toolbar-class a {

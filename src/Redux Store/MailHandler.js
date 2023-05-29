@@ -1,19 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const InitialState={receiverMail:null, Subject:null,Message:null}
+const InitialState={receiveMail:[], Subject:null,Message:null, SendMails:[]}
 
 const SendMialSlice=createSlice({
     name:"SendMail",
     initialState:InitialState,
     reducers:{
         GetReceivermail(state,action){
-            state.receiverMail=action.payload
+            state.receiveMail=action.payload
         },
         GetSubject(state,action){
             state.Subject=action.payload
         },
         GetMessage(state,action){
             state.Message=action.payload
+        },
+        GetSendMail(state,action){
+            state.SendMails=action.payload
         }
     }
 })
