@@ -1,7 +1,6 @@
 .wrapper-class {
     position: relative;
     height: 77%;
-    border: 2px solid blue;
     width: 100%;
 
 }
@@ -14,8 +13,6 @@
     overflow: auto;
     height: 91% !important;
     width: 100%;
-    border:  2px solid;
-
 }
 .wrapper-class .toolbar-class {
     background: rgb(34, 34, 34);

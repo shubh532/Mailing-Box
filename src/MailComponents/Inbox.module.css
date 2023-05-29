@@ -3,3 +3,8 @@
     overflow: auto;
     padding: 0px 7px;
 }
+
+.Inbox a {
+    text-decoration: none;
+    color: inherit;
+}

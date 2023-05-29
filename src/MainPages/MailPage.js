@@ -44,7 +44,8 @@ function MailPage() {
                 Sender:Sender,
                 Subject: GetSubject.current.value,
                 Message: Message,
-                TimeDate: TimeDate
+                TimeDate: TimeDate,
+                ReadStatus:false,
             })
             if (Response.status === 200) {
                 alert("Email Send...")

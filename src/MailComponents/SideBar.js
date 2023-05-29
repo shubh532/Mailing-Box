@@ -14,8 +14,19 @@ import SendIcon from '@mui/icons-material/Send';
 import ArchiveIcon from '@mui/icons-material/Archive';
 import WarningSharpIcon from '@mui/icons-material/WarningSharp';
 import DeleteSharpIcon from '@mui/icons-material/DeleteSharp';
+import Badge from '@mui/material/Badge';
+import { useSelector } from "react-redux";
 
-function SideBar() {  
+function SideBar() {
+
+    const UnReadMails = useSelector(state => state.SendReducer.receiveMail)
+    let UnreadMailNum=0
+    UnReadMails.forEach(mails => {
+
+        if (mails.ReadStatus === false) {
+            UnreadMailNum += 1
+        }
+    })
 
     return (
         <div className={Style.Container}>
@@ -23,7 +34,14 @@ function SideBar() {
                 <Link to="/product/compose-mail" >+Compose</Link>
             </div>
             <div className={Style.SideNavBar}>
-                <Link to="/product/inbox" ><AllInboxIcon /><span>Inbox</span></Link>
+                <Link to="/product/inbox" >
+                    <AllInboxIcon />
+                    <span>Inbox</span>
+                    <Badge color="primary" badgeContent={UnreadMailNum} max={999} anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                    }}></Badge>
+                </Link>
                 <Link to="/product/unread"><MarkEmailUnreadIcon /><span>Unread</span></Link>
                 <Link to="/product/starred"><StarIcon /><span>Starred</span></Link>
                 <Link to="/product/draft"><EditCalendarIcon /><span>Draft</span></Link>

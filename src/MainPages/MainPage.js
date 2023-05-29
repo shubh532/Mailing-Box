@@ -5,6 +5,7 @@ import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import Inbox from "../MailComponents/Inbox";
 import MailPage from "./MailPage";
+import ShowMail from "../MailComponents/ShowMail";
 
 function MainPage() {
     return (
@@ -13,14 +14,19 @@ function MainPage() {
                 <SideBar />
             </Col>
             <Switch>
-                <Route path="/product/inbox">
+                <Route path="/product/inbox" exact>
                     <Col xs={10} className="p-2 mailpagerow">
                         <Inbox />
                     </Col>
                 </Route>
-                <Route path="/product/compose-mail">
+                <Route path="/product/compose-mail" >
                     <Col xs={10} className="p-2 mailpagerow">
                         <MailPage />
+                    </Col>
+                </Route>
+                <Route path="/product/inbox/:mailId">
+                    <Col xs={10} className="p-2 mailpagerow">
+                        <ShowMail />
                     </Col>
                 </Route>
             </Switch>

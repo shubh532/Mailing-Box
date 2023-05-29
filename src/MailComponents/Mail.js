@@ -1,9 +1,11 @@
 import Checkbox from '@mui/material/Checkbox'
 import Style from "./Mail.module.css"
-import StarBorderPurple500OutlinedIcon from '@mui/icons-material/StarBorderPurple500Outlined';
 import DeleteSharpIcon from '@mui/icons-material/DeleteSharp';
 import ArchiveIcon from '@mui/icons-material/Archive';
 import { useState } from 'react';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { Badge } from '@mui/material';
+
 
 
 function Mail(props) {
@@ -20,19 +22,22 @@ function Mail(props) {
 
 
     return (
-        <div className={Style.MailContainer} onMouseLeave={OnMouseNotHover} onMouseOver={OnMouseHover}>
-            <div className={Style.SenderInfo}>
-                <Checkbox  />
-                <StarBorderPurple500OutlinedIcon fontSize='small' />
-                <span className={Style.Name}>{props.Sender}</span>
+        <Link to={`/product/inbox/${props.id}`} className={Style.MailContainer} onMouseLeave={OnMouseNotHover} onMouseOver={OnMouseHover} onClick={props.ReadMessagehandler}>
+            <div className={Style.SenderInfo} >
+                <Checkbox />
+                {!props.ReadStatus&&<Badge color="primary" variant='dot' anchorOrigin={{ vertical: 'bottom', horizontal: 'left', }}>
+                    <span className={Style.Name}>{props.Sender}</span>
+                </Badge>}
+                {props.ReadStatus&&<span >{props.Sender}</span>}
+
             </div>
             <div className={Style.MailContent}>
-                <div className={Style.SubjetSpan}>{props.Subject}</div>
+                <div className={props.ReadStatus?Style.MAilRead:Style.SubjetSpan}>{props.Subject}</div>
                 <div className={Style.ContentSpan}>- {Message}</div>
                 {!Hover && <div className={Style.TimeBlock}>{props.TimeDate.Time}</div>}
                 {Hover && <div className={Style.HoverBtns}><button><DeleteSharpIcon /></button> <button><ArchiveIcon /></button> </div>}
             </div>
-        </div>
+        </Link>
     )
 }
 export default Mail;
