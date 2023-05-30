@@ -1,12 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import Style from "./Inbox.module.css";
 import Mail from "./Mail";
 import { SendMailActions } from "../Redux Store/MailHandler";
-import Spinner from "../UIComponent/Loader";
 function Inbox() {
-    const [Loader, SetLoader] = useState(false)
     let email = useSelector(state => state.AuthReducer.email)
     if (email) {
         email = email.replace(/[.]/g, "")
@@ -15,36 +13,40 @@ function Inbox() {
     const ReceiveMails = useSelector(state => state.SendReducer.receiveMail)
     const Dispatch = useDispatch()
 
-    useEffect(() => {
-        async function GetMails() {
-            try {
-                SetLoader(true)
-                email = email.replace(/[.]/g, "")
-                email = email.replace(/[@]/g, "")
-                const Response = await axios.get(`https://mailbox-d39a9-default-rtdb.firebaseio.com/MailBox/${email}.json`)
-                if (Response.status === 200) {
-                    const Mails = []
-                    for (const key in Response.data) {
-                        Mails.unshift({
-                            id: key,
-                            Message: Response.data[key].Message,
-                            Subject: Response.data[key].Subject,
-                            Sender: Response.data[key].Sender,
-                            Reciever: Response.data[key].Reciever,
-                            TimeDate: Response.data[key].TimeDate,
-                            ReadStatus: Response.data[key].ReadStatus,
-                        })
-                    }
-                    Dispatch(SendMailActions.GetReceivermail(Mails))
+    async function GetMails() {
+        try {
+            email = email.replace(/[.]/g, "")
+            email = email.replace(/[@]/g, "")
+            const Response = await axios.get(`https://mailbox-d39a9-default-rtdb.firebaseio.com/MailBox/${email}.json`)
+            if (Response.status === 200) {
+                const Mails = []
+                for (const key in Response.data) {
+                    Mails.unshift({
+                        id: key,
+                        Message: Response.data[key].Message,
+                        Subject: Response.data[key].Subject,
+                        Sender: Response.data[key].Sender,
+                        Reciever: Response.data[key].Reciever,
+                        TimeDate: Response.data[key].TimeDate,
+                        ReadStatus: Response.data[key].ReadStatus,
+                    })
                 }
-                SetLoader(false)
-            } catch (err) {
-                SetLoader(false)
-                console.log(err)
+                Dispatch(SendMailActions.GetReceivermail(Mails))
+               
             }
+        } catch (err) {
+            console.log(err)
+            
         }
+    }
+    useEffect(() => {
         GetMails()
-    }, [Dispatch])
+        const intervalId = setInterval(GetMails, 6000) //Every 5 sencond api call
+        return () => {
+            clearInterval(intervalId)
+        }
+    }, [])
+
 
     const ReadMessagehandler = async (mail, id) => {
         if (mail.ReadStatus === false) {
@@ -80,7 +82,7 @@ function Inbox() {
     }
     return (
         <div className={Style.Inbox}>
-            {!Loader && ReceiveMails.map(mails => {
+            {ReceiveMails.map(mails => {
                 return (
                     <Mail key={mails.id}
                         id={mails.id}
@@ -96,8 +98,6 @@ function Inbox() {
                 )
             })
             }
-            {Loader && <Spinner/>}
-
         </div>
     )
 }
