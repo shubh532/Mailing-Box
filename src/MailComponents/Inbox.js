@@ -86,6 +86,7 @@ function Inbox() {
                         Subject={mails.Subject}
                         TimeDate={mails.TimeDate}
                         ReadStatus={mails.ReadStatus}
+                        path={`/product/inbox/${mails.id}`}
                         ReadMessagehandler={ReadMessagehandler.bind(null, mails, mails.id)}
                         DeleteMailHandler={DeleteMailHandler.bind(null, mails.id)} />
                 )

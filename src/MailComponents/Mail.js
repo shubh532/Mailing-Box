@@ -20,7 +20,7 @@ function Mail(props) {
 
     return (
         <div className={Style.MailContainer} onMouseLeave={OnMouseNotHover} onMouseOver={OnMouseHover}>
-            <Link to={`/product/inbox/${props.id}`} onClick={props.ReadMessagehandler}>
+            <Link to={props.path} onClick={props.ReadMessagehandler}>
                 <div className={Style.SenderInfo} >
                     <Checkbox />
                     {!props.ReadStatus && <Badge color="primary" variant='dot' anchorOrigin={{ vertical: 'bottom', horizontal: 'left', }}>

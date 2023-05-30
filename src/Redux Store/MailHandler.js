@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const InitialState={receiveMail:[], Subject:null,Message:null, SendMails:[],UnReadMails:0}
+const InitialState={receiveMail:[], Subject:null,Message:null, SendMails:[],UnReadMails:0,}
 
 const SendMialSlice=createSlice({
     name:"SendMail",
