@@ -53,14 +53,27 @@ function Inbox() {
                 ReadStatus: true
             }
             try {
-               const Response= await axios.put(`https://mailbox-d39a9-default-rtdb.firebaseio.com/MailBox/${email}/${id}.json`, ReadMail)
+                await axios.put(`https://mailbox-d39a9-default-rtdb.firebaseio.com/MailBox/${email}/${id}.json`, ReadMail)
             } catch (err) {
                 console.log(err)
             }
         }
 
     }
+    const DeleteMailHandler = async (id) => {
+        const UpdateReceiveMails = ReceiveMails.filter(mails => id !== mails.id)
+        Dispatch(SendMailActions.GetReceivermail(UpdateReceiveMails))
 
+        try {
+            const Response = axios.delete(`https://mailbox-d39a9-default-rtdb.firebaseio.com/MailBox/${email}/${id}.json`)
+            if (Response.status === 200) {
+
+            }
+        } catch (err) {
+            console.log(err)
+        }
+
+    }
     return (
         <div className={Style.Inbox}>
             {ReceiveMails.map(mails => {
@@ -73,7 +86,8 @@ function Inbox() {
                         Subject={mails.Subject}
                         TimeDate={mails.TimeDate}
                         ReadStatus={mails.ReadStatus}
-                        ReadMessagehandler={ReadMessagehandler.bind(null, mails, mails.id)} />
+                        ReadMessagehandler={ReadMessagehandler.bind(null, mails, mails.id)}
+                        DeleteMailHandler={DeleteMailHandler.bind(null, mails.id)} />
                 )
             })
             }
