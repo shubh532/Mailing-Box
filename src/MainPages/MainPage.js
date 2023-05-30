@@ -15,27 +15,27 @@ function MainPage() {
                 <SideBar />
             </Col>
             <Switch>
-                <Route path="/product/inbox" exact>
+                <Route path="/main-page/inbox" exact>
                     <Col xs={10} className="p-2 mailpagerow">
                         <Inbox />
                     </Col>
                 </Route>
-                <Route path="/product/sent" >
+                <Route path="/main-page/sent" exact>
                     <Col xs={10} className="p-2 mailpagerow">
                         <SentBox />
                     </Col>
                 </Route>
-                <Route path="/product/compose-mail" >
+                <Route path="/main-page/compose-mail" >
                     <Col xs={10} className="p-2 mailpagerow">
                         <MailPage />
                     </Col>
                 </Route>
-                <Route path="/product/inbox/:mailId">
+                <Route path="/main-page/inbox/:mailId">
                     <Col xs={10} className="p-2 mailpagerow">
                         <ShowMail />
                     </Col>
                 </Route>
-                <Route path="/product/sent/:mailId">
+                <Route path="/main-page/sent/:mailId">
                     <Col xs={10} className="p-2 mailpagerow">
                         <ShowMail />
                     </Col>

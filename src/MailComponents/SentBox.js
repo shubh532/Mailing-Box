@@ -1,11 +1,13 @@
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import Style from "./Inbox.module.css";
 import Mail from "./Mail";
 import { SendMailActions } from "../Redux Store/MailHandler";
-import { toUnitless } from "@mui/material/styles/cssUtils";
+import Spinner from "../UIComponent/Loader";
+
 function SentBox() {
+    const [Loader, SetLoader] = useState(false)
     let email = useSelector(state => state.AuthReducer.email)
     if (email) {
         email = email.replace(/[.]/g, "")
@@ -17,6 +19,7 @@ function SentBox() {
     useEffect(() => {
         async function GetMails() {
             try {
+                SetLoader(true)
                 const Response = await axios.get(`https://mailbox-d39a9-default-rtdb.firebaseio.com/MailBox.json`)
                 if (Response.status === 200) {
                     const Mails = []
@@ -32,9 +35,11 @@ function SentBox() {
                         })
                     }
                     Dispatch(SendMailActions.GetSendMail(Mails))
+                    SetLoader(false)
                 }
             } catch (err) {
                 console.log(err)
+                SetLoader(false)
             }
         }
         GetMails()
@@ -74,7 +79,7 @@ function SentBox() {
     // }
     return (
         <div className={Style.Inbox}>
-            {SendMails.map(mails => {
+            {!Loader&&SendMails.map(mails => {
                 return (
                     <Mail key={mails.id}
                         id={mails.id}
@@ -82,7 +87,7 @@ function SentBox() {
                         Reciever={mails.Reciever}
                         Sender={mails.Sender}
                         Subject={mails.Subject}
-                        path={`/product/sent/${mails.id}`}
+                        path={`/main-page/sent/${mails.id}`}
                         TimeDate={mails.TimeDate}
                         ReadStatus={true}
                         // ReadMessagehandler={ReadMessagehandler.bind(null, mails, mails.id)}
@@ -91,6 +96,7 @@ function SentBox() {
                 )
             })
             }
+            {Loader&&<Spinner/>}
         </div>
     )
 }

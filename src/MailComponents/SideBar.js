@@ -16,11 +16,18 @@ import WarningSharpIcon from '@mui/icons-material/WarningSharp';
 import DeleteSharpIcon from '@mui/icons-material/DeleteSharp';
 import Badge from '@mui/material/Badge';
 import { useSelector } from "react-redux";
+import { useState } from "react";
 
 function SideBar() {
+    const [ActiveTab, SetActiveTab] = useState("inbox")
+
+    const ActiveTabHandler = (tabName) => {
+        SetActiveTab(tabName)
+
+    }
 
     const UnReadMails = useSelector(state => state.SendReducer.receiveMail)
-    let UnreadMailNum=0
+    let UnreadMailNum = 0
     UnReadMails.forEach(mails => {
 
         if (mails.ReadStatus === false) {
@@ -31,10 +38,10 @@ function SideBar() {
     return (
         <div className={Style.Container}>
             <div className={Style.ComposeBtn}>
-                <Link to="/product/compose-mail" >+Compose</Link>
+                <Link onClick={() => { ActiveTabHandler(null) }} to="/main-page/compose-mail" >+Compose</Link>
             </div>
             <div className={Style.SideNavBar}>
-                <Link to="/product/inbox" >
+                <Link style={ActiveTab === "inbox" ? { backgroundColor: "rgb(87, 95, 102)" } : {}} to="/main-page/inbox" onClick={() => { ActiveTabHandler("inbox") }} >
                     <AllInboxIcon />
                     <span>Inbox</span>
                     <Badge color="primary" badgeContent={UnreadMailNum} max={999} anchorOrigin={{
@@ -42,19 +49,58 @@ function SideBar() {
                         horizontal: 'right',
                     }}></Badge>
                 </Link>
-                <Link to="/product/unread"><MarkEmailUnreadIcon /><span>Unread</span></Link>
-                <Link to="/product/starred"><StarIcon /><span>Starred</span></Link>
-                <Link to="/product/draft"><EditCalendarIcon /><span>Draft</span></Link>
-                <Link to="/product/sent"><SendIcon /><span>Sent</span></Link>
-                <Link to="/product/archive"><ArchiveIcon /><span>Archive</span></Link>
-                <Link to="/product/spam"><WarningSharpIcon /><span>Spam</span></Link>
-                <Link to="/product/deleted-items"><DeleteSharpIcon /><span>Deleted Items</span></Link>
-                <Link to="/product/photos"><PhotoSizeSelectActualIcon /><span>Photos</span></Link>
-                <Link to="/product/videos"><VideoLibraryIcon /><span>Video</span></Link>
-                <Link to="/product/documents"><TextSnippetIcon /><span>Documents</span></Link>
-                <Link to="/product/subscription"><SubscriptionsSharpIcon /><span>Subscriptions</span></Link>
-                <Link to="/product/deal"><LocalOfferSharpIcon /><span>Deal</span></Link>
-                <Link to="/product/travel"><TravelExploreSharpIcon /><span>Travel</span></Link>
+                <Link style={ActiveTab === "Unread" ? { backgroundColor: "rgb(87, 95, 102)" } : {}} to="/main-page/unread" onClick={() => { ActiveTabHandler("Unread") }}>
+                    <MarkEmailUnreadIcon />
+                    <span>Unread</span>
+                </Link>
+                <Link style={ActiveTab === "Starred" ? { backgroundColor: "rgb(87, 95, 102)" } : {}} to="/main-page/starred" onClick={() => { ActiveTabHandler("Starred") }}>
+                    <StarIcon />
+                    <span>Starred</span>
+                </Link>
+                <Link style={ActiveTab === "Draft" ? { backgroundColor: "rgb(87, 95, 102)" } : {}} to="/main-page/draft" onClick={() => { ActiveTabHandler("Draft") }}>
+                    <EditCalendarIcon />
+                    <span>Draft</span>
+                </Link>
+                <Link style={ActiveTab === "Sent" ? { backgroundColor: "rgb(87, 95, 102)" } : {}} to="/main-page/sent" onClick={() => { ActiveTabHandler("Sent") }}>
+                    <SendIcon />
+                    <span>Sent</span>
+                </Link>
+                <Link style={ActiveTab === "Archive" ? { backgroundColor: "rgb(87, 95, 102)" } : {}} to="/main-page/archive" onClick={() => { ActiveTabHandler("Archive") }}>
+                    <ArchiveIcon />
+                    <span>Archive</span>
+                </Link>
+                <Link style={ActiveTab === "Spam" ? { backgroundColor: "rgb(87, 95, 102)" } : {}} to="/main-page/spam" onClick={() => { ActiveTabHandler("Spam") }}>
+                    <WarningSharpIcon />
+                    <span>Spam</span>
+                </Link>
+                <Link style={ActiveTab === "Deleted" ? { backgroundColor: "rgb(87, 95, 102)" } : {}} to="/main-page/deleted-items" onClick={() => { ActiveTabHandler("Deleted") }}>
+                    <DeleteSharpIcon />
+                    <span>Deleted Items</span>
+                </Link>
+                <Link style={ActiveTab === "Photos" ? { backgroundColor: "rgb(87, 95, 102)" } : {}} to="/main-page/photos" onClick={() => { ActiveTabHandler("Photos") }}>
+                    <PhotoSizeSelectActualIcon />
+                    <span>Photos</span>
+                </Link>
+                <Link style={ActiveTab === "Video" ? { backgroundColor: "rgb(87, 95, 102)" } : {}} to="/main-page/videos" onClick={() => { ActiveTabHandler("Video") }}>
+                    <VideoLibraryIcon />
+                    <span>Video</span>
+                </Link>
+                <Link style={ActiveTab === "Documents" ? { backgroundColor: "rgb(87, 95, 102)" } : {}} to="/main-page/documents" onClick={() => { ActiveTabHandler("Documents") }}>
+                    <TextSnippetIcon />
+                    <span>Documents</span>
+                </Link>
+                <Link style={ActiveTab === "Subscriptions" ? { backgroundColor: "rgb(87, 95, 102)" } : {}} to="/main-page/subscription" onClick={() => { ActiveTabHandler("Subscriptions") }}>
+                    <SubscriptionsSharpIcon />
+                    <span>Subscriptions</span>
+                </Link>
+                <Link style={ActiveTab === "Deal" ? { backgroundColor: "rgb(87, 95, 102)" } : {}} to="/main-page/deal" onClick={() => { ActiveTabHandler("Deal") }}>
+                    <LocalOfferSharpIcon />
+                    <span>Deal</span>
+                </Link>
+                <Link style={ActiveTab === "Travel" ? { backgroundColor: "rgb(87, 95, 102)" } : {}} to="/main-page/travel" onClick={() => { ActiveTabHandler("Travel") }}>
+                    <TravelExploreSharpIcon />
+                    <span>Travel</span>
+                </Link>
             </div>
 
 

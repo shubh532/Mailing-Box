@@ -1,10 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import Style from "./Inbox.module.css";
 import Mail from "./Mail";
 import { SendMailActions } from "../Redux Store/MailHandler";
+import Spinner from "../UIComponent/Loader";
 function Inbox() {
+    const [Loader, SetLoader] = useState(false)
     let email = useSelector(state => state.AuthReducer.email)
     if (email) {
         email = email.replace(/[.]/g, "")
@@ -16,7 +18,7 @@ function Inbox() {
     useEffect(() => {
         async function GetMails() {
             try {
-
+                SetLoader(true)
                 email = email.replace(/[.]/g, "")
                 email = email.replace(/[@]/g, "")
                 const Response = await axios.get(`https://mailbox-d39a9-default-rtdb.firebaseio.com/MailBox/${email}.json`)
@@ -35,7 +37,9 @@ function Inbox() {
                     }
                     Dispatch(SendMailActions.GetReceivermail(Mails))
                 }
+                SetLoader(false)
             } catch (err) {
+                SetLoader(false)
                 console.log(err)
             }
         }
@@ -76,7 +80,7 @@ function Inbox() {
     }
     return (
         <div className={Style.Inbox}>
-            {ReceiveMails.map(mails => {
+            {!Loader && ReceiveMails.map(mails => {
                 return (
                     <Mail key={mails.id}
                         id={mails.id}
@@ -86,12 +90,14 @@ function Inbox() {
                         Subject={mails.Subject}
                         TimeDate={mails.TimeDate}
                         ReadStatus={mails.ReadStatus}
-                        path={`/product/inbox/${mails.id}`}
+                        path={`/main-page/inbox/${mails.id}`}
                         ReadMessagehandler={ReadMessagehandler.bind(null, mails, mails.id)}
                         DeleteMailHandler={DeleteMailHandler.bind(null, mails.id)} />
                 )
             })
             }
+            {Loader && <Spinner/>}
+
         </div>
     )
 }

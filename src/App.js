@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { Switch, Route, Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import SignUp from "./Components/SignUp";
 import "./App.css"
-import HomePage from "./MainPages/Home";
 import Container from "react-bootstrap/esm/Container";
 import MainPage from "./MainPages/MainPage";
 
@@ -18,10 +17,7 @@ function App() {
         <Route path="/" exact>
           <SignUp />
         </Route>
-        <Route path="/home">
-          {isLogin ? <HomePage /> : <Redirect to="/" />}
-        </Route>
-        <Route path="/product">
+        <Route path="/main-page">
           {isLogin ? <MainPage /> : <Redirect to="/" />}
         </Route>
       </Switch>
