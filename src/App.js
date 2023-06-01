@@ -15,7 +15,7 @@ function App() {
       <NavBar />
       <Switch>
         <Route path="/" exact>
-          <SignUp />
+          {!isLogin?<SignUp />:<Redirect to="/main-page/inbox"/>}
         </Route>
         <Route path="/main-page">
           {isLogin ? <MainPage /> : <Redirect to="/" />}

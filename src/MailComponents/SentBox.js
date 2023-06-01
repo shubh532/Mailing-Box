@@ -1,4 +1,4 @@
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import Style from "./Inbox.module.css";
@@ -13,14 +13,16 @@ function SentBox() {
         email = email.replace(/[.]/g, "")
         email = email.replace(/[@]/g, "")
     }
-    const SendMails = useSelector(state => state.SendReducer.receiveMail)
+    const SendMails = useSelector(state => state.SendReducer.SendMails)
     const Dispatch = useDispatch()
 
     useEffect(() => {
         async function GetMails() {
+            let SenderMail = localStorage.getItem("Email")
+            SenderMail = SenderMail.replace(/[.@]/g, "")
             try {
                 SetLoader(true)
-                const Response = await axios.get(`https://mailbox-d39a9-default-rtdb.firebaseio.com/MailBox.json`)
+                const Response = await axios.get(`https://mailbox-d39a9-default-rtdb.firebaseio.com/Sender/${SenderMail}.json`)
                 if (Response.status === 200) {
                     const Mails = []
                     for (const key in Response.data) {
@@ -44,7 +46,6 @@ function SentBox() {
         }
         GetMails()
     }, [Dispatch])
-
     // const ReadMessagehandler = async (mail, id) => {
     //     if (mail.ReadStatus === false) {
     //         const ReadMail = {
@@ -79,7 +80,7 @@ function SentBox() {
     // }
     return (
         <div className={Style.Inbox}>
-            {!Loader&&SendMails.map(mails => {
+            {!Loader && SendMails.map(mails => {
                 return (
                     <Mail key={mails.id}
                         id={mails.id}
@@ -90,13 +91,13 @@ function SentBox() {
                         path={`/main-page/sent/${mails.id}`}
                         TimeDate={mails.TimeDate}
                         ReadStatus={true}
-                        // ReadMessagehandler={ReadMessagehandler.bind(null, mails, mails.id)}
-                        // DeleteMailHandler={DeleteMailHandler.bind(null, mails.id)} 
-                        />
+                    // ReadMessagehandler={ReadMessagehandler.bind(null, mails, mails.id)}
+                    // DeleteMailHandler={DeleteMailHandler.bind(null, mails.id)} 
+                    />
                 )
             })
             }
-            {Loader&&<Spinner/>}
+            {Loader && <Spinner />}
         </div>
     )
 }

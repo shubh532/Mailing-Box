@@ -14,9 +14,9 @@ const AuthenticationSlice=createSlice({
             state.IsAuthenticate=action.payload
             state.isLogin=!!state.IsAuthenticate
         },
-        LogOut(state){
-            state.IsAuthenticate=null
-            state.isLogin=!!state.IsAuthenticate
+        LogOut(state,action){
+            state.IsAuthenticate=action.payload
+            state.isLogin=false
         }
     }
     

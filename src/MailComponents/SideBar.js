@@ -16,7 +16,7 @@ import WarningSharpIcon from '@mui/icons-material/WarningSharp';
 import DeleteSharpIcon from '@mui/icons-material/DeleteSharp';
 import Badge from '@mui/material/Badge';
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function SideBar() {
     const [ActiveTab, SetActiveTab] = useState("inbox")
@@ -25,7 +25,6 @@ function SideBar() {
         SetActiveTab(tabName)
 
     }
-
     const UnReadMails = useSelector(state => state.SendReducer.receiveMail)
     let UnreadMailNum = 0
     UnReadMails.forEach(mails => {

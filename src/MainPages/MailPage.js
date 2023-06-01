@@ -32,37 +32,44 @@ function MailPage() {
 
 
     const SendMailHandler = async () => {
-        const Sender=localStorage.getItem("Email")
-        let email = GetRecievermailID.current.value
-        email = email.replace(/[.]/g, "")
-        email = email.replace(/[@]/g, "")
+        let SenderMail = localStorage.getItem("Email")
         const TimeDate = GetTimeAndDate()
-
+        const Mail = {
+            Reciever: GetRecievermailID.current.value,
+            Sender: SenderMail,
+            Subject: GetSubject.current.value,
+            Message: Message,
+            TimeDate: TimeDate,
+            ReadStatus: false,
+        }
+        let RecieverEmail = GetRecievermailID.current.value
+        RecieverEmail = RecieverEmail.replace(/[.@]/g, "")
         try {
-            const Response = await axios.post(`https://mailbox-d39a9-default-rtdb.firebaseio.com/MailBox/${email}.json`, {
-                Reciever: GetRecievermailID.current.value,
-                Sender:Sender,
-                Subject: GetSubject.current.value,
-                Message: Message,
-                TimeDate: TimeDate,
-                ReadStatus:false,
-            })
+            const Response = await axios.post(`https://mailbox-d39a9-default-rtdb.firebaseio.com/receiver/${RecieverEmail}.json`, Mail)
             if (Response.status === 200) {
-                alert("Email Send...")
-                const SendMail = [...sendMail]
-                SendMail.push({
-                    Sender:Sender,
-                    Reciever: GetRecievermailID.current.value,
-                    Subject: GetSubject.current.value,
-                    Message: Message,
-                    TimeDate: TimeDate
-                })
-                Dispatch(SendMailActions.GetSendMail(SendMail))
-                console.log(sendMail)
+                console.log(Response)
+                SenderMail = SenderMail.replace(/[.@]/g, "")
+                console.log(SenderMail)
+                const Response2 = await axios.post(`https://mailbox-d39a9-default-rtdb.firebaseio.com/Sender/${SenderMail}.json`, Mail)
+                if (Response2.status === 200) {
+                    alert("Email Send...")
+                    const SendMail = [...sendMail]
+                    SendMail.push({
+                        Sender: SenderMail,
+                        Reciever: GetRecievermailID.current.value,
+                        Subject: GetSubject.current.value,
+                        Message: Message,
+                        TimeDate: TimeDate
+                    })
+                    Dispatch(SendMailActions.GetSendMail(SendMail))
+                    console.log(sendMail)
+
+                }
             }
         } catch (error) {
             console.log(error)
-        }}
+        }
+    }
 
 
     return (

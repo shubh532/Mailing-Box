@@ -8,9 +8,17 @@ import DOMPurify from 'dompurify';
 
 function ShowMail() {
 
-    const mailId = useParams()
-    const ReceiveMails = useSelector(state => state.SendReducer.receiveMail)
-    const Mail = ReceiveMails.find((mail) => mail.id == mailId.mailId)
+    const urlParams = useParams()
+    const Mails =useSelector(state=>{
+        if(urlParams.mailBoxes==="sent"){
+           return state.SendReducer.SendMails
+        }
+        if(urlParams.mailBoxes==="inbox"){
+            return state.SendReducer.receiveMail
+        }
+    })
+    console.log(Mails)
+    const Mail = Mails.find((mail) =>mail.id === urlParams.mailId)
 
     function createMarkup(html) {
         return {

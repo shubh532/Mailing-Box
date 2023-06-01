@@ -1,5 +1,6 @@
 import "../App.css"
-import { Switch, Route } from "react-router-dom/cjs/react-router-dom.min";
+import { useSelector } from "react-redux";
+import { Switch, Route, Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import SideBar from "../MailComponents/SideBar";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
@@ -9,35 +10,32 @@ import ShowMail from "../MailComponents/ShowMail";
 import SentBox from "../MailComponents/SentBox";
 
 function MainPage() {
+    const isLogin = useSelector(state => state.AuthReducer.isLogin)
     return (
         <Row className="custom-row mt-5">
             <Col xs={2} className="p-0 fixed-top mt-5 sidebarrow">
-                <SideBar />
+                {isLogin ? <SideBar /> : <Redirect to="/" />}
             </Col>
             <Switch>
                 <Route path="/main-page/inbox" exact>
                     <Col xs={10} className="p-2 mailpagerow">
-                        <Inbox />
+                        {isLogin ? <Inbox /> : <Redirect to="/" />}
                     </Col>
                 </Route>
                 <Route path="/main-page/sent" exact>
                     <Col xs={10} className="p-2 mailpagerow">
-                        <SentBox />
+
+                        {isLogin ? <SentBox /> : <Redirect to="/" />}
                     </Col>
                 </Route>
                 <Route path="/main-page/compose-mail" >
                     <Col xs={10} className="p-2 mailpagerow">
-                        <MailPage />
+                        {isLogin ? <MailPage /> : <Redirect to="/" />}
                     </Col>
                 </Route>
-                <Route path="/main-page/inbox/:mailId">
+                <Route path="/main-page/:mailBoxes/:mailId">
                     <Col xs={10} className="p-2 mailpagerow">
-                        <ShowMail />
-                    </Col>
-                </Route>
-                <Route path="/main-page/sent/:mailId">
-                    <Col xs={10} className="p-2 mailpagerow">
-                        <ShowMail />
+                        {isLogin ? <ShowMail /> : <Redirect to="/" />}
                     </Col>
                 </Route>
             </Switch>

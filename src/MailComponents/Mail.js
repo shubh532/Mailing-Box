@@ -17,7 +17,6 @@ function Mail(props) {
         SetHover(false)
     }
 
-
     return (
         <div className={Style.MailContainer} onMouseLeave={OnMouseNotHover} onMouseOver={OnMouseHover}>
             <Link to={props.path} onClick={props.ReadMessagehandler}>
