@@ -17,7 +17,7 @@ function ShowMail() {
             return state.SendReducer.receiveMail
         }
     })
-    console.log(Mails)
+
     const Mail = Mails.find((mail) =>mail.id === urlParams.mailId)
 
     function createMarkup(html) {

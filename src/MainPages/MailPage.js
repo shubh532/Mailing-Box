@@ -62,7 +62,6 @@ function MailPage() {
                         TimeDate: TimeDate
                     })
                     Dispatch(SendMailActions.GetSendMail(SendMail))
-                    console.log(sendMail)
 
                 }
             }

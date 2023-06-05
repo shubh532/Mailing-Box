@@ -1,51 +1,26 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Style from "./Inbox.module.css";
 import Mail from "./Mail";
 import { SendMailActions } from "../Redux Store/MailHandler";
 import Spinner from "../UIComponent/Loader";
+import useFetch from "../CustomHooks/useFetch";
 
 function SentBox() {
-    const [Loader, SetLoader] = useState(false)
     let email = useSelector(state => state.AuthReducer.email)
     if (email) {
-        email = email.replace(/[.]/g, "")
-        email = email.replace(/[@]/g, "")
+        email = email.replace(/[.@]/g, "")
     }
     const SendMails = useSelector(state => state.SendReducer.SendMails)
     const Dispatch = useDispatch()
+    let SenderMail = localStorage.getItem("Email")
+    SenderMail = SenderMail.replace(/[.@]/g, "")
 
-    useEffect(() => {
-        async function GetMails() {
-            let SenderMail = localStorage.getItem("Email")
-            SenderMail = SenderMail.replace(/[.@]/g, "")
-            try {
-                SetLoader(true)
-                const Response = await axios.get(`https://mailbox-d39a9-default-rtdb.firebaseio.com/Sender/${SenderMail}.json`)
-                if (Response.status === 200) {
-                    const Mails = []
-                    for (const key in Response.data) {
-                        Mails.unshift({
-                            id: key,
-                            Message: Response.data[key].Message,
-                            Subject: Response.data[key].Subject,
-                            Sender: Response.data[key].Sender,
-                            Reciever: Response.data[key].Reciever,
-                            TimeDate: Response.data[key].TimeDate,
-                            ReadStatus: Response.data[key].ReadStatus,
-                        })
-                    }
-                    Dispatch(SendMailActions.GetSendMail(Mails))
-                    SetLoader(false)
-                }
-            } catch (err) {
-                console.log(err)
-                SetLoader(false)
-            }
-        }
-        GetMails()
-    }, [Dispatch])
+    const Mails=useFetch(`https://mailbox-d39a9-default-rtdb.firebaseio.com/Sender/${SenderMail}.json`)
+    useEffect(()=>{
+        Dispatch(SendMailActions.GetSendMail(Mails.Data))
+    },[Mails,Dispatch])
+
     // const ReadMessagehandler = async (mail, id) => {
     //     if (mail.ReadStatus === false) {
     //         const ReadMail = {
@@ -76,11 +51,11 @@ function SentBox() {
     //     } catch (err) {
     //         console.log(err)
     //     }
+    //}
 
-    // }
     return (
         <div className={Style.Inbox}>
-            {!Loader && SendMails.map(mails => {
+            {SendMails && SendMails.map(mails => {
                 return (
                     <Mail key={mails.id}
                         id={mails.id}
@@ -91,13 +66,11 @@ function SentBox() {
                         path={`/main-page/sent/${mails.id}`}
                         TimeDate={mails.TimeDate}
                         ReadStatus={true}
-                    // ReadMessagehandler={ReadMessagehandler.bind(null, mails, mails.id)}
-                    // DeleteMailHandler={DeleteMailHandler.bind(null, mails.id)} 
                     />
                 )
             })
             }
-            {Loader && <Spinner />}
+            {Mails.Loader && <Spinner />}
         </div>
     )
 }

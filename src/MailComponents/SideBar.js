@@ -27,8 +27,7 @@ function SideBar() {
     }
     const UnReadMails = useSelector(state => state.SendReducer.receiveMail)
     let UnreadMailNum = 0
-    UnReadMails.forEach(mails => {
-
+    UnReadMails&&UnReadMails.forEach(mails => {
         if (mails.ReadStatus === false) {
             UnreadMailNum += 1
         }

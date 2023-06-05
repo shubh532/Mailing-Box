@@ -1,9 +1,10 @@
-import { useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import Style from "./Inbox.module.css";
 import Mail from "./Mail";
 import { SendMailActions } from "../Redux Store/MailHandler";
+
+// import useDelete from "../CustomHooks/useDelete";
 function Inbox() {
     let email = localStorage.getItem("Email")
     if (email) {
@@ -11,40 +12,6 @@ function Inbox() {
     }
     const ReceiveMails = useSelector(state => state.SendReducer.receiveMail)
     const Dispatch = useDispatch()
-
-    async function GetMails() {
-        try {
-            const Response = await axios.get(`https://mailbox-d39a9-default-rtdb.firebaseio.com/receiver/${email}.json`)
-            if (Response.status === 200) {
-                const Mails = []
-                for (const key in Response.data) {
-                    Mails.unshift({
-                        id: key,
-                        Message: Response.data[key].Message,
-                        Subject: Response.data[key].Subject,
-                        Sender: Response.data[key].Sender,
-                        Reciever: Response.data[key].Reciever,
-                        TimeDate: Response.data[key].TimeDate,
-                        ReadStatus: Response.data[key].ReadStatus,
-                    })
-                }
-                Dispatch(SendMailActions.GetReceivermail(Mails))
-                
-               
-            }
-        } catch (err) {
-            console.log(err)
-            
-        }
-    }
-    useEffect(() => {
-        GetMails()
-        const intervalId = setInterval(GetMails, 6000) //Every 5 sencond api call
-        return () => {
-            clearInterval(intervalId)
-        }
-    }, [])
-
 
     const ReadMessagehandler = async (mail, id) => {
         if (mail.ReadStatus === false) {
@@ -67,7 +34,6 @@ function Inbox() {
     const DeleteMailHandler = async (id) => {
         const UpdateReceiveMails = ReceiveMails.filter(mails => id !== mails.id)
         Dispatch(SendMailActions.GetReceivermail(UpdateReceiveMails))
-
         try {
             const Response = await axios.delete(`https://mailbox-d39a9-default-rtdb.firebaseio.com/receiver/${email}/${id}.json`)
             if (Response.status === 200) {
@@ -77,10 +43,11 @@ function Inbox() {
         }
 
     }
+
     // console.log(ReceiveMails)
     return (
         <div className={Style.Inbox}>
-            {ReceiveMails.map(mails => {
+            {ReceiveMails && ReceiveMails.map(mails => {
                 return (
                     <Mail key={mails.id}
                         id={mails.id}
