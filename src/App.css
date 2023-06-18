@@ -2,18 +2,16 @@
   padding: 0px !important;
   /* background-color:rgb(255, 255, 255); */
 }
-
-/* .custom-row{
-  width: 100%;
-  height: 9vh;
-} */
 .sidebarrow{
-  height: 93.2vh;
+  height: 100%;
+
 }
 .mailpagerow{
-  position: fixed;
-  right: 0rem;
-  top:3.5rem;
-  /* border: 2px solid; */
-  height: 92vh;
+  height: 100%;
+}
+.RowCompo{
+  /* border: 2px solid red; */
+  width: 100vw;
+  height: 93.2vh;
+  margin:5rem auto;
 }

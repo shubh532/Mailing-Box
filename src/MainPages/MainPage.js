@@ -12,8 +12,8 @@ import SentBox from "../MailComponents/SentBox";
 function MainPage() {
     const isLogin = useSelector(state => state.AuthReducer.isLogin)
     return (
-        <Row className="custom-row mt-5">
-            <Col xs={2} className="p-0 fixed-top mt-5 sidebarrow">
+        <Row className="custom-row RowCompo">
+            <Col xs={2} className="p-0 sidebarrow">
                 {isLogin ? <SideBar /> : <Redirect to="/" />}
             </Col>
             <Switch>

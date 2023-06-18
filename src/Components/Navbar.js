@@ -4,6 +4,8 @@ import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { AuthActions } from "../Redux Store/Authentication.js"
+import { Avatar } from '@mui/material';
+import stringAvatar from '../UIComponent/bgColorGenerator.js';
 
 function NavBar() {
 
@@ -18,7 +20,7 @@ function NavBar() {
         localStorage.removeItem("Email")
     }
     return (
-        <Navbar bg="dark" expand="lg" variant='dark' className="fixed-top">
+        <Navbar bg="dark" expand="lg" variant='dark' className="fixed-top p-0">
             <Container>
                 <Navbar.Brand as={Link} to="/main-page/inbox">Mailing Box</Navbar.Brand>
 
@@ -28,7 +30,7 @@ function NavBar() {
                     {/* <Nav.Link as={Link} to="/aboutus">About Us</Nav.Link> */}
                 </Nav>
                 <Nav className="m-0">
-                    {IsLogin && <Nav.Link as={Link} to="/" onClick={LogoutHandler}>LogOut</Nav.Link>}
+                    {IsLogin && <Nav.Link as={Link} to="/"><Avatar {...stringAvatar("Shubham Mahulkar")}></Avatar></Nav.Link>}
                     {!IsLogin && <Nav.Link as={Link} to="/">Login</Nav.Link>}
                 </Nav>
 
