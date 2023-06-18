@@ -1,6 +1,5 @@
 .Container{
   padding: 0px !important;
-  /* background-color:rgb(255, 255, 255); */
 }
 .sidebarrow{
   height: 100%;
@@ -10,8 +9,8 @@
   height: 100%;
 }
 .RowCompo{
-  /* border: 2px solid red; */
   width: 100vw;
-  height: 93.2vh;
-  margin:5rem auto;
+  height: 92.2vh;
+  margin:3.5rem auto;
+  position: fixed;
 }
