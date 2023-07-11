@@ -8,8 +8,10 @@ import Inbox from "../MailComponents/Inbox";
 import MailPage from "./MailPage";
 import ShowMail from "../MailComponents/ShowMail";
 import SentBox from "../MailComponents/SentBox";
+import { memo } from "react";
 
 function RoutePage() {
+    console.log("ROUTE PAGE")
     const isLogin = useSelector(state => state.AuthReducer.isLogin)
     return (
         <>
@@ -44,4 +46,4 @@ function RoutePage() {
     )
 }
 
-export default RoutePage;
+export default memo(RoutePage);

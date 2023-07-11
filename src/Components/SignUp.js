@@ -16,6 +16,7 @@ import { AuthActions } from '../Redux Store/Authentication';
 
 
 function SignUp() {
+    console.log("SignupPAge")
     const [validated, setValidated] = useState(false);
     const [matchPaaword, NotMatchPassWord] = useState(false)
     const [InvalidCredetial,setInvalidCredetial] = useState(false)

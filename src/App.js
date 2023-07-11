@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import NavBar from "./Components/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { Switch, Route, Redirect } from "react-router-dom/cjs/react-router-dom.min";
@@ -8,11 +8,13 @@ import Container from "react-bootstrap/esm/Container";
 import RoutePage from "./MainPages/RoutePage";
 import useFetch from "./CustomHooks/useFetch";
 import { SendMailActions } from "./Redux Store/MailHandler";
+import SideBar from "./MailComponents/SideBar";
 
 
 function App() {
 
   const isLogin = useSelector(state => state.AuthReducer.isLogin)
+  const ShowSideNav = useSelector(state => state.SideBarBtnFunc.ShowSideNav)
   const Dispatch = useDispatch()
 
   let email = localStorage.getItem("Email")
@@ -21,11 +23,15 @@ function App() {
   }
 
   const InboxMails = useFetch(`https://mailboxauth-default-rtdb.firebaseio.com/receiver/${email}.json`)
+  const InboxHandler=useCallback(()=>{
+    Dispatch(SendMailActions.GetReceivermail(InboxMails.Data))
+  },[InboxMails,Dispatch])
   useEffect(() => {
-      Dispatch(SendMailActions.GetReceivermail(InboxMails.Data))
-  }, [InboxMails])
+    InboxHandler()
+  }, [InboxHandler])
 
   return (
+    
     <Container fluid className={`Container`}>
       <NavBar />
       <Switch>
@@ -36,6 +42,7 @@ function App() {
           {isLogin ? <RoutePage /> : <Redirect to="/" />}
         </Route>
       </Switch>
+      {ShowSideNav&&<SideBar/>}
     </Container>
   );
 }

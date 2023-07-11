@@ -47,9 +47,7 @@ function MailPage() {
         try {
             const Response = await axios.post(`https://mailboxauth-default-rtdb.firebaseio.com/receiver/${RecieverEmail}.json`, Mail)
             if (Response.status === 200) {
-                console.log(Response)
                 SenderMail = SenderMail.replace(/[.@]/g, "")
-                console.log(SenderMail)
                 const Response2 = await axios.post(`https://mailboxauth-default-rtdb.firebaseio.com/Sender/${SenderMail}.json`, Mail)
                 if (Response2.status === 200) {
                     alert("Email Send...")

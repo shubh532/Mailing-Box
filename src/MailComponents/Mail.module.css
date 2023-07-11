@@ -18,7 +18,6 @@
 .SenderInfo {
     display: flex;
     align-items: center;
-    width: 35%;
 }
 
 .SenderInfo .Name {
@@ -28,10 +27,8 @@
 .MailContent{
     display: flex;
     align-items: center;
-    width: 94%;
     white-space:nowrap;
     overflow: hidden;
-    
 }
 .SubjetSpan{
     padding: 0px 7px;
@@ -61,7 +58,7 @@
     border-radius: 15px;
   }
   .TimeBlock{
-    font-size: 1.35px ;
+    font-size: 0.5rem ;
     font-weight: bold;
   }
   .HoverBtns button{
