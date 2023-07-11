@@ -9,16 +9,16 @@ import DOMPurify from 'dompurify';
 function ShowMail() {
 
     const urlParams = useParams()
-    const Mails =useSelector(state=>{
-        if(urlParams.mailBoxes==="sent"){
-           return state.SendReducer.SendMails
+    const Mails = useSelector(state => {
+        if (urlParams.mailBoxes === "sent") {
+            return state.SendReducer.SendMails
         }
-        if(urlParams.mailBoxes==="inbox"){
+        if (urlParams.mailBoxes === "inbox") {
             return state.SendReducer.receiveMail
         }
     })
 
-    const Mail = Mails.find((mail) =>mail.id === urlParams.mailId)
+    const Mail = Mails.find((mail) => mail.id === urlParams.mailId)
 
     function createMarkup(html) {
         return {

@@ -53,7 +53,7 @@ function SignUp() {
         }
         SetLoader(true)
         try {
-            const Response = await axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBh3udI3xsO6YmhgGzLlQffg9FSmZcF_zI", {
+            const Response = await axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyC_Fq-kUm5U2IjmUus5kgju7ldINr9d7oQ", {
                 email: getEmail.current.value,
                 password: getPassWord.current.value,
                 returnSecureToken: true
@@ -84,7 +84,7 @@ function SignUp() {
         }
         try {
             SetLoader(true)
-            const Response = await axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBh3udI3xsO6YmhgGzLlQffg9FSmZcF_zI", {
+            const Response = await axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyC_Fq-kUm5U2IjmUus5kgju7ldINr9d7oQ", {
                 email: getEmail.current.value,
                 password: getPassWord.current.value,
                 returnSecreToken: true

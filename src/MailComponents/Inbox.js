@@ -24,7 +24,7 @@ function Inbox() {
                 ReadStatus: true
             }
             try {
-                await axios.put(`https://mailbox-d39a9-default-rtdb.firebaseio.com/receiver/${email}/${id}.json`, ReadMail)
+                await axios.put(`https://mailboxauth-default-rtdb.firebaseio.com/receiver/${email}/${id}.json`, ReadMail)
             } catch (err) {
                 console.log(err)
             }
@@ -35,7 +35,7 @@ function Inbox() {
         const UpdateReceiveMails = ReceiveMails.filter(mails => id !== mails.id)
         Dispatch(SendMailActions.GetReceivermail(UpdateReceiveMails))
         try {
-            const Response = await axios.delete(`https://mailbox-d39a9-default-rtdb.firebaseio.com/receiver/${email}/${id}.json`)
+            const Response = await axios.delete(`https://mailboxauth-default-rtdb.firebaseio.com/receiver/${email}/${id}.json`)
             if (Response.status === 200) {
             }
         } catch (err) {

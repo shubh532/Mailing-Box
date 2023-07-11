@@ -7,7 +7,6 @@ function useFetch(url) {
 
     useEffect(() => {
         async function GetMails() {
-            console.log("running")
             SetLoader(true)
             try {
                 const Response = await axios.get(url)

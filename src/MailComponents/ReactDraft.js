@@ -3,12 +3,12 @@ import { useDispatch } from 'react-redux';
 import { EditorState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import { convertToHTML } from 'draft-convert';
-import "./MailingBox.css"
+import "./ReactDraft.css"
 
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { SendMailActions } from '../Redux Store/MailHandler';
 
-function MailingBox() {
+function ReactDraft() {
     const [editorState, setEditorState] = useState(
         () => EditorState.createEmpty(),
     );
@@ -35,4 +35,4 @@ function MailingBox() {
     )
 }
 
-export default MailingBox;
+export default ReactDraft;

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useRef } from "react";
 import Container from "react-bootstrap/esm/Container";
-import MailingBox from "../MailComponents/MailingBox";
+import ReactDraft from "../MailComponents/ReactDraft";
 import Style from "./MailPage.module.css"
 import Button from "react-bootstrap/Button"
 import axios from "axios";
@@ -45,12 +45,12 @@ function MailPage() {
         let RecieverEmail = GetRecievermailID.current.value
         RecieverEmail = RecieverEmail.replace(/[.@]/g, "")
         try {
-            const Response = await axios.post(`https://mailbox-d39a9-default-rtdb.firebaseio.com/receiver/${RecieverEmail}.json`, Mail)
+            const Response = await axios.post(`https://mailboxauth-default-rtdb.firebaseio.com/receiver/${RecieverEmail}.json`, Mail)
             if (Response.status === 200) {
                 console.log(Response)
                 SenderMail = SenderMail.replace(/[.@]/g, "")
                 console.log(SenderMail)
-                const Response2 = await axios.post(`https://mailbox-d39a9-default-rtdb.firebaseio.com/Sender/${SenderMail}.json`, Mail)
+                const Response2 = await axios.post(`https://mailboxauth-default-rtdb.firebaseio.com/Sender/${SenderMail}.json`, Mail)
                 if (Response2.status === 200) {
                     alert("Email Send...")
                     const SendMail = [...sendMail]
@@ -80,7 +80,7 @@ function MailPage() {
                 </div>
             </Row>
 
-            <MailingBox />
+            <ReactDraft />
             <Row className={`p-3 ${Style.BtnRow}`}>
                 <Button onClick={SendMailHandler} variant="primary">Send</Button>
             </Row>

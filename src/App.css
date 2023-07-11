@@ -14,3 +14,17 @@
   margin:3.5rem auto;
   position: fixed;
 }
+.Customization{
+  display: none;
+}
+@media(max-width:1000px){
+  .sidebarrow{
+    display: none;
+  }
+  .mailpagerow{
+    width: 100%;
+  }
+  .Customization{
+    display: block;
+  }
+}

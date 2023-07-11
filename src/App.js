@@ -5,7 +5,7 @@ import { Switch, Route, Redirect } from "react-router-dom/cjs/react-router-dom.m
 import SignUp from "./Components/SignUp";
 import "./App.css"
 import Container from "react-bootstrap/esm/Container";
-import MainPage from "./MainPages/MainPage";
+import RoutePage from "./MainPages/RoutePage";
 import useFetch from "./CustomHooks/useFetch";
 import { SendMailActions } from "./Redux Store/MailHandler";
 
@@ -20,7 +20,7 @@ function App() {
       email = email.replace(/[.@]/g, "")
   }
 
-  const InboxMails = useFetch(`https://mailbox-d39a9-default-rtdb.firebaseio.com/receiver/${email}.json`)
+  const InboxMails = useFetch(`https://mailboxauth-default-rtdb.firebaseio.com/receiver/${email}.json`)
   useEffect(() => {
       Dispatch(SendMailActions.GetReceivermail(InboxMails.Data))
   }, [InboxMails])
@@ -33,7 +33,7 @@ function App() {
           {!isLogin?<SignUp />:<Redirect to="/main-page/inbox"/>}
         </Route>
         <Route path="/main-page">
-          {isLogin ? <MainPage /> : <Redirect to="/" />}
+          {isLogin ? <RoutePage /> : <Redirect to="/" />}
         </Route>
       </Switch>
     </Container>

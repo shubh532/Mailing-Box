@@ -16,7 +16,7 @@ function SentBox() {
     let SenderMail = localStorage.getItem("Email")
     SenderMail = SenderMail.replace(/[.@]/g, "")
 
-    const Mails=useFetch(`https://mailbox-d39a9-default-rtdb.firebaseio.com/Sender/${SenderMail}.json`)
+    const Mails=useFetch(`https://mailboxauth-default-rtdb.firebaseio.com/Sender/${SenderMail}.json`)
     useEffect(()=>{
         Dispatch(SendMailActions.GetSendMail(Mails.Data))
     },[Mails,Dispatch])
@@ -32,7 +32,7 @@ function SentBox() {
     //             ReadStatus: true
     //         }
     //         try {
-    //             await axios.put(`https://mailbox-d39a9-default-rtdb.firebaseio.com/MailBox/${email}/${id}.json`, ReadMail)
+    //             await axios.put(`https://mailboxauth-default-rtdb.firebaseio.com/MailBox/${email}/${id}.json`, ReadMail)
     //         } catch (err) {
     //             console.log(err)
     //         }
@@ -44,7 +44,7 @@ function SentBox() {
     //     Dispatch(SendMailActions.GetReceivermail(UpdateReceiveMails))
 
     //     try {
-    //         const Response = axios.delete(`https://mailbox-d39a9-default-rtdb.firebaseio.com/MailBox/${email}/${id}.json`)
+    //         const Response = axios.delete(`https://mailboxauth-default-rtdb.firebaseio.com/MailBox/${email}/${id}.json`)
     //         if (Response.status === 200) {
 
     //         }
