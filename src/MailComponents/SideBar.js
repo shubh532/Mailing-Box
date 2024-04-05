@@ -18,6 +18,7 @@ import { useCallback, useState } from "react";
 function SideBar() {
     const [ActiveTab, SetActiveTab] = useState("inbox")
 
+
     const ActiveTabHandler = useCallback((tabName) => {
         SetActiveTab(tabName)
     },[])

@@ -4,7 +4,6 @@ import Style from "./Inbox.module.css";
 import Mail from "./Mail";
 import { SendMailActions } from "../Redux Store/MailHandler";
 
-// import useDelete from "../CustomHooks/useDelete";
 function Inbox() {
     let email = localStorage.getItem("Email")
     if (email) {
@@ -44,7 +43,6 @@ function Inbox() {
 
     }
 
-    // console.log(ReceiveMails)
     return (
         <div className={Style.Inbox}>
             {ReceiveMails && ReceiveMails.map(mails => {

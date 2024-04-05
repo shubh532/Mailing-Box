@@ -50,7 +50,6 @@ padding: 10px;
 .PrintAndTime {
     display: flex;
     font-size: 15px;
-    width: 18%;
     justify-content: space-around;
 }
 .MailContainer{
@@ -61,4 +60,12 @@ padding: 10px;
 
 .ReadMail{
     font-weight:normal;
+}
+@media only screen and (max-width: 768px){
+    .info .NameContainer{
+        display:block;
+    }
+    .PrintAndTime {
+        display: block;
+    }
 }

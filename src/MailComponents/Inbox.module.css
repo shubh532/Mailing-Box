@@ -1,6 +1,12 @@
-.Inbox{
+.Inbox {
     height: 100%;
     overflow: auto;
     padding: 0px 7px;
     box-shadow: 0px 0px 5px 2px rgb(84, 84, 84);
+}
+
+@media only screen and (max-width: 768px) {
+    .Inbox {
+        box-shadow:none;
+    }
 }

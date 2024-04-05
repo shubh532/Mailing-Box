@@ -18,6 +18,9 @@
   display: none;
 }
 @media only screen and (max-width: 768px){
+  .RowCompo{
+    height: 93vh;
+  }
   .sidebarrow{
     display: none;
   }

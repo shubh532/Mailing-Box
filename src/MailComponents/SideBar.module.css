@@ -9,8 +9,9 @@
 
 .ComposeBtn {
     margin-bottom: 1.5rem;
-    padding: 0px 0.2rem;
+    padding: 0px 0.1rem;
     margin: 1.5rem auto;
+    font-size: 0.2rem;
 }
 
 .ComposeBtn a {
@@ -28,7 +29,7 @@
 .SideNavBar span {
     margin-left: 5px;
     padding-right: 10px;
-    font-size: 1rem;
+    font-size: 0.2rem;
 }
 
 .SideNavBar a {
@@ -52,10 +53,9 @@
 @media only screen and (max-width: 768px){
     .Container{
         position: absolute;
-        /* z-index: 5; */
         margin-top: 3rem;
         border-top: 2px solid white;
-        width: 30%;
+        width: 35%;
         height: 100vh;
         
     }

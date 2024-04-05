@@ -7,6 +7,7 @@
     width: 100%;
     border-bottom: 2px solid gray;
 }
+
 .MailContainer a {
     text-decoration: none;
     color: inherit;
@@ -24,55 +25,78 @@
     margin-left: 10px;
     font-weight: bold;
 }
-.MailContent{
+
+.MailContent {
     display: flex;
     align-items: center;
-    white-space:nowrap;
+    white-space: nowrap;
     overflow: hidden;
 }
-.SubjetSpan{
+
+.SubjetSpan {
     padding: 0px 7px;
-    width:auto;
+    width: auto;
     font-weight: bold;
 }
-.ContentSpan{
+
+.ContentSpan {
     width: auto;
     overflow: hidden;
-    text-overflow:ellipsis;
+    text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 13.5px;
     padding: 0px 10px;
-    
+
 }
 
-.MailContainer:hover{
+.MailContainer:hover {
     box-shadow: 0px 0px 5px 2px rgb(141, 141, 141);
     cursor: pointer;
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
     width: 5px;
 }
+
 ::-webkit-scrollbar-thumb {
     background: #9da0a4;
     border-radius: 15px;
-  }
-  .TimeBlock{
-    font-size: 0.5rem ;
+}
+
+.TimeBlock {
+    font-size: 0.5rem;
     font-weight: bold;
-  }
-  .HoverBtns button{
+}
+
+.HoverBtns {
+    display: flex;
+}
+
+.HoverBtns button {
     background-color: inherit;
     border: none;
     margin: 0px 3px;
     padding: 5px;
-   
-  }
-  .HoverBtns button:hover{
+
+}
+
+.HoverBtns button:hover {
     background-color: rgb(181, 181, 181);
     border-radius: 15px;
     
   }
   .MailRead{
     font-weight: normal;
-  }
+}
+
+
+
+@media only screen and (max-width: 768px) {
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    .TimeBlock {
+        display: none;
+    }
+}

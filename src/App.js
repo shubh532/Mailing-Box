@@ -8,8 +8,7 @@ import Container from "react-bootstrap/esm/Container";
 import RoutePage from "./MainPages/RoutePage";
 import useFetch from "./CustomHooks/useFetch";
 import { SendMailActions } from "./Redux Store/MailHandler";
-import SideBar from "./MailComponents/SideBar";
-
+import SideBar from "./MailComponents/SideBar";;
 
 function App() {
 
